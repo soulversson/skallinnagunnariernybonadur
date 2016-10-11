@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <title>Mikilfenglegt Hópbarefli Miracle</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--meta name="viewport" content="width=device-width, initial-scale=1"-->
     <style class="cp-pen-styles">
 body{
 	text-align: center;
@@ -11,7 +11,6 @@ body{
   font-family: sans-serif;
   font-weight: 100;
 }
-
 h1{
   color: white;
   font-weight: 400;
@@ -20,7 +19,6 @@ h1{
       font-family: "Lobster Two",cursive;
 	  text-shadow: 0px 0px 4px #000000;
 }
-
 #clockdiv{
 	font-family: sans-serif;
 	color: #fff;
@@ -29,16 +27,14 @@ h1{
 	text-align: center;
 	font-size: 60px;
 }
-
-#clockdiv > div{
+#clockdiv > .timeitem{
 	padding: 20px;
 	border-radius: 6px;
 	background: ##326fad;
 	background-color:rgba(50, 111, 173, 0.5);
 	display: inline-block;
 }
-
-#clockdiv div > span{
+#clockdiv .timeitem > span{
 	padding: 30px;
 	border-radius: 6px;
 	background: ##326fad;
@@ -46,11 +42,21 @@ h1{
 	display: inline-block;
 }
 
+#clockdiv > .infoitem{
+	padding: 20px;
+	border-radius: 6px;
+	background: ##326fad;
+	background-color:rgba(50, 111, 173, 0.5);
+	display: block;
+	margin-top: 20px;
+	text-align:left;
+	font-size: 20px;
+	
+}
 .smalltext{
 	padding-top: 10px;
 	font-size: 20px;
 }
-
 video#bgvid { 
     position: fixed;
     top: 50%;
@@ -75,27 +81,35 @@ video#bgvid {
 </video>
 
 	<div id="clockdiv">
-	  <div>
+	  <div class="timeitem">
 		<span class="days"></span>
 		<div class="smalltext">Dagar</div>
 	  </div>
-	  <div>
+	  <div class="timeitem">
 		<span class="hours"></span>
 		<div class="smalltext">Klukkustundir</div>
 	  </div>
-	  <div>
+	  <div class="timeitem">
 		<span class="minutes"></span>
 		<div class="smalltext">Mínútur</div>
 	  </div>
-	  <div>
+	  <div class="timeitem">
 		<span class="seconds"></span>
 		<div class="smalltext">Sekúndur</div>
+	  </div>
+	  <div class="infoitem">
+		<p>Staðsetning: Mitt á milli Breiðholts og Svenna
+		<br/>Dagskrá:</p>
+		<ol>
+		<li> Eyðum peningunum hans Gunnars í vatn</li>
+		<li> Eyðum peningunum hans Gunnars í hópum</li>
+		<li> Eyðum peningunum hans Gunnars í kolvetni</li>
+		</ol>
 	  </div>
 	</div>
 
 <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js"></script>
 <script>
-
 function getTimeRemaining(endtime) {
   var t = Date.parse(endtime) - Date.parse(new Date());
   var seconds = Math.floor((t / 1000) % 60);
@@ -110,32 +124,25 @@ function getTimeRemaining(endtime) {
     'seconds': seconds
   };
 }
-
-
 function initializeClock(id, endtime) {
   var clock = document.getElementById(id);
   var daysSpan = clock.querySelector('.days');
   var hoursSpan = clock.querySelector('.hours');
   var minutesSpan = clock.querySelector('.minutes');
   var secondsSpan = clock.querySelector('.seconds');
-
   function updateClock() {
     var t = getTimeRemaining(endtime);
-
     daysSpan.innerHTML = t.days;
     hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
     minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
     secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
     if (t.total <= 0) {
       clearInterval(timeinterval);
     }
   }
-
   updateClock();
   var timeinterval = setInterval(updateClock, 1000);
 }
-
 var deadline = new Date("November 3, 2016 16:00:00");
 var x = getTimeRemaining(deadline);
 if (x.total <= 0) {
@@ -145,8 +152,6 @@ if (x.total <= 0) {
 else{
 	initializeClock('clockdiv', deadline);
 }
-
-
 </script>
 </body>
 </html>
