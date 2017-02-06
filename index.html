@@ -94,7 +94,7 @@ video#bgvid {
 </style></head><body>
 
 
-<video autoplay loop poster="mikki.jpg" id="bgvid">
+<video autoplay autobuffer loop height="360" width="640" poster="mikki.jpg" id="bgvid">
     <source src="mikki.m4v">
     <source src="mikki.webm" type="video/webm">
 </video>
@@ -140,13 +140,10 @@ video#bgvid {
 
 <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js"></script>
 <script>
-var myVideo = document.getElementById('bgvid');
-
-myVideo.addEventListener('canplay', function() {
-  myVideo.play();
-});
-myVideo.load();
-myVideo.play();
+var video = document.getElementById('bgvid');
+video.addEventListener('click',function(){
+  video.play();
+},false);
 
 function getTimeRemaining(endtime) {
   var t = Date.parse(endtime) - Date.parse(new Date());
