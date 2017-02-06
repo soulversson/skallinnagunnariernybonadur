@@ -140,10 +140,15 @@ video#bgvid {
 
 <script src="//assets.codepen.io/assets/common/stopExecutionOnTimeout-53beeb1a007ec32040abaf4c9385ebfc.js"></script>
 <script>
-var video = document.getElementById('bgvid');
-video.addEventListener('click',function(){
+// get the video
+var video = document.querySelector('video');
+// use the whole window and a *named function*
+window.addEventListener('touchstart', function videoStart() {
   video.play();
-},false);
+  console.log('first touch');
+  // remove from the window and call the function we are removing
+  this.removeEventListener('touchstart', videoStart);
+});
 
 function getTimeRemaining(endtime) {
   var t = Date.parse(endtime) - Date.parse(new Date());
